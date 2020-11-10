@@ -2,18 +2,20 @@ package ui.controler;
 import domain.database.DatabankenPlayers;
 import domain.model.Player;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 
 @WebServlet("/servlet")
 public class Servlet2 extends HttpServlet {
+
+    public Servlet2(){
+
+    }
 
     DatabankenPlayers databankenPlayers = new DatabankenPlayers();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,8 +57,7 @@ public class Servlet2 extends HttpServlet {
     }
 
     private String overview (HttpServletRequest request, HttpServletResponse response){
-        request.setAttribute("p1","null");
-        request.setAttribute("p2","null");
+
         request.setAttribute("db",databankenPlayers.getSpelers());
         request.setAttribute("spelersbelgie",databankenPlayers.playersFromBelgium());
 
@@ -68,8 +69,7 @@ public class Servlet2 extends HttpServlet {
         Player player = databankenPlayers.findPlayer((String)request.getParameter("deleted"));
         ArrayList arrayList = databankenPlayers.getSpelers();
         arrayList.remove(player);
-        request.setAttribute("p1","null");
-        request.setAttribute("p2","null");
+
         request.setAttribute("db",arrayList);
         request.setAttribute("spelersbelgie",databankenPlayers.playersFromBelgium());
 
@@ -84,6 +84,7 @@ public class Servlet2 extends HttpServlet {
         Player player = new Player(naam,nationaliteit,team);
         databankenPlayers.addPlayer(player);
         request.setAttribute("db",databankenPlayers.getSpelers());
+        request.setAttribute("spelersbelgie",databankenPlayers.playersFromBelgium());
         return "lijst.jsp";
     }
 
@@ -100,7 +101,7 @@ public class Servlet2 extends HttpServlet {
         request.setAttribute("p2" , p2);
         request.setAttribute("db",databankenPlayers.getSpelers());
         request.setAttribute("spelersbelgie",databankenPlayers.playersFromBelgium());
-        return "lijst.jsp";
+        return "find_1.jsp";
     }
 
 }

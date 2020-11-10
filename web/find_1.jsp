@@ -25,8 +25,8 @@
     <ul>
         <li><a href="index.html" >HOME</a></li>
         <li><a href="tweedePag.html">ADD PLAYER</a></li>
-        <li><a href="servlet?task=overview" class="kleur">PLAYER LIST</a></li>
-        <li><a href="find.jsp" >FIND PLAYER</a></li>
+        <li><a href="servlet?task=overview">PLAYER LIST</a></li>
+        <li><a href="find.jsp" class="kleur">FIND PLAYER</a></li>
     </ul>
 </nav>
 <article>
@@ -42,24 +42,6 @@
     %>
     <p><%=a%></p>
     <p><%=b%></p>
-    <table class="tabel">
-        <thead>
-        <th>naam</th>
-        <th>land van afkomst</th>
-        <th>team</th>
-        </thead>
-        <%!ArrayList<Player> spelers = new ArrayList<>();%>
-        <%spelers =  (ArrayList<Player>)request.getAttribute("db");%>
-        <%for (int i = 0; i < spelers.size(); i++){%>
-            <tr>
-                <td><p><%=spelers.get(i).getNaam()%></p></td>
-                <td><p><%=spelers.get(i).getNationaliteit()%></p></td>
-                <td><p><%=spelers.get(i).getTeam()%></p></td>
-                <td><a href="servlet?task=delete&deleted=<%=spelers.get(i).getNaam()%>">delete</a></td>
-            </tr>
-        <%}%>
-    </table>
-    <p>how many players from belgium = <%=request.getAttribute("spelersbelgie")%></p>
 </article>
 </body>
 </html>
